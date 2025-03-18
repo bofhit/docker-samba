@@ -1,0 +1,10 @@
+# Vim files
+*~
+*.swo
+*.swp
+
+# Python files
+*.pyc
+*.pckl
+*.venv*
+*__pycache__*
