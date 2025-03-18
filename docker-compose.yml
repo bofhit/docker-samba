@@ -1,0 +1,4 @@
+services:
+  file-share:
+    image: samba:$VERSION
+
