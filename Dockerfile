@@ -2,9 +2,10 @@ FROM alpine
 
 # Install samba
 RUN apk --no-cache --no-progress upgrade && \
-    apk --no-cache --no-progress add bash samba shadow tini tzdata && \
+    apk --no-cache add bash samba shadow tini tzdata && \
+    #apk --no-cache --no-progress add bash samba shadow tini tzdata && \
     addgroup -S smb && \
-    adduser -S -D -H -h /tmp -s /sbin/nologin -G smb -g 'Scan User' scanuser &&\
+    adduser -S -D -H -h /tmp -s /sbin/nologin -G smb -g 'Samba User' smbuser &&\
     file="/etc/samba/smb.conf" && \
     sed -i 's|^;* *\(log file = \).*|   \1/dev/stdout|' $file && \
     sed -i 's|^;* *\(load printers = \).*|   \1no|' $file && \
@@ -22,7 +23,7 @@ RUN apk --no-cache --no-progress upgrade && \
     echo '   force create mode = 0664' >>$file && \
     echo '   directory mask = 0775' >>$file && \
     echo '   force directory mode = 0775' >>$file && \
-    echo '   force user = scanuser' >>$file && \
+    echo '   force user = smbuser' >>$file && \
     echo '   force group = smb' >>$file && \
     echo '   follow symlinks = yes' >>$file && \
     echo '   load printers = no' >>$file && \
@@ -61,5 +62,6 @@ EXPOSE 137/udp 138/udp 139 445
 HEALTHCHECK --interval=60s --timeout=15s \
             CMD smbclient -L \\localhost -U % -m SMB3
 
+#ENTRYPOINT ["/sbin/tini", "bash", "/usr/bin/samba.sh"]
 ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/samba.sh"]
 
