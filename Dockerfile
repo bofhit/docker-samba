@@ -38,6 +38,10 @@ RUN apk --no-cache --no-progress upgrade && \
     echo '   recycle:maxsize = 0' >>$file && \
     echo '   recycle:repository = .deleted' >>$file && \
     echo '   recycle:versions = yes' >>$file && \
+    echo '   passdb backend = ldapsam:ldap://ads01.int.blessingsofhope.com' >>$file && \
+    echo '   ldap suffix = dc=blessingsofhope,dc=com' >> $file && \
+    echo '   ldap admin dn = cn=ldap user,ou=users,ou=blehop,dc=int,dc=blessingsofhope,dc=com' >> $file && \
+    echo '   ldap passwd sync = yes' >> $file && \
     echo '' >>$file && \
     echo '   # Security' >>$file && \
     echo '   client ipc max protocol = SMB3' >>$file && \
