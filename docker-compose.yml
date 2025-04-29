@@ -1,4 +1,16 @@
 services:
   file-share:
     image: samba:$VERSION
+    container_name: samba
+    hostname: $HOSTNAME
+    env_file:
+      - .env
+    ports:
+      - 137:137
+      - 138:138
+      - 139:139
+      - 445:445
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
 
