@@ -1,5 +1,6 @@
 #!/bin/bash -ex
 
+service cron start
 service nmbd start
 service smbd start
 

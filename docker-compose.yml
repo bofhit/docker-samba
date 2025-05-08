@@ -14,6 +14,8 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
       - samba-share:/srv/share
+      - samba-log:/var/log
 volumes:
   samba-share:
+  samba-log:
 
