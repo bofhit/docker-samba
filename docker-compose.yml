@@ -13,6 +13,9 @@ services:
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+      #     - ./sssd.conf:/etc/sssd/sssd.conf
+      #     - ./krb5.conf:/etc/krb5.conf
+      #     - ./krb5.keytab:/etc/krb5.keytab
       - samba-share:/srv/share
       - samba-log:/var/log
 volumes:
