@@ -8,3 +8,7 @@
 *.pckl
 *.venv*
 *__pycache__*
+
+# Confie files
+.env
+
