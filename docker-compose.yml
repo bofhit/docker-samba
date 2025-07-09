@@ -2,6 +2,7 @@ services:
   file-share:
     image: samba:$VERSION
     container_name: samba
+    restart: always
     hostname: $HOSTNAME
     env_file:
       - .env
