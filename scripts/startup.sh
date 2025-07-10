@@ -4,8 +4,13 @@ service cron start
 service nmbd start
 service smbd start
 
-useradd -m $SHARE_USER
-echo "$SHARE_USER:$SHARE_USER_PASSWD" | chpasswd
+if grep "^$SHARE_USER:" /etc/passwd; then
+    echo "$SHARE_USER already exists."
+else
+    echo "Adding user $SHARE_USER..."
+    useradd -m $SHARE_USER
+    echo "$SHARE_USER:$SHARE_USER_PASSWD" | chpasswd
+fi
 
 # Add Samba user.
 echo -e "$SHARE_USER_PASSWD\n$SHARE_USER_PASSWD" | \
